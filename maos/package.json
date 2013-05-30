@@ -1,0 +1,9 @@
+{
+  "name": "maos",
+  "version": "0.0.1",
+  "author": "Forest Belton <forest@homolo.gy>",
+  "description": "a macro assembler for ois.c",
+  "dependencies": {
+    "pegjs": "*"
+  }
+}

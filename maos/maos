@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var fs     = require('fs'),
+    parser = require('./parser');
+
+if(process.argv.length != 3) {
+  console.log('usage: maos [file]');
+  process.exit(1);
+}
+
+var code = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
+console.log(parser.parse(code));

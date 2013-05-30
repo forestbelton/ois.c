@@ -6,5 +6,5 @@ int main() {
   while(m - mem < sizeof mem && fread(++m, 1, 1, stdin));
   while(p = ((mem[p+2] -= mem[p+1]) <= 0) ? mem[p+3] : p+3);
 
-  return putchar(p[0]), 0;
+  return putchar(mem[0]), 0;
 }

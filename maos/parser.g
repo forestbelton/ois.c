@@ -47,6 +47,7 @@ insn
   = mov
   / add
   / data
+  / jmp
 
 data
   = "DATA " n:num { return [n] }
@@ -58,5 +59,8 @@ mov
 add
   = "ADD " a:num ", " b:num c:(", " i:num { return i })?
   { return gen_add(a, b, c) }
+
+jmp
+  = "JMP " a:num { return gen_jmp(a) }
 
 num = d:[0-9]+ { return parseInt(d.join('')) }

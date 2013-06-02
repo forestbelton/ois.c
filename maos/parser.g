@@ -2,6 +2,17 @@
   var z    = 255;
   var next = 4;
   
+  function output(insns) {
+    var toHex = function(x) {
+      var s = x.toString(16);
+      return s.length == 1 ? '0' + s : s;
+    }
+    var bytes = [].concat.apply([], insns).map(toHex).join('');
+    var buf   = new Buffer(bytes, 'hex');
+
+    return buf;
+  }
+
   function step(out, a, b) {
     var out = out.concat([a, b, next]);
     
@@ -41,7 +52,7 @@
 }
 
 prgm
-  = is:(i:insn '\n' { return i })+ { return [].concat.apply([], is) }
+  = is:(i:insn '\n' { return i })+ { return output(is); }
 
 insn
   = mov

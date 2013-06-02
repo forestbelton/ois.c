@@ -9,4 +9,6 @@ if(process.argv.length != 3) {
 }
 
 var code = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
-console.log(parser.parse(code));
+var out  = parser.parse(code);
+
+process.stdout.write(out);

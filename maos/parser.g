@@ -77,7 +77,7 @@ insn
   / jmp
 
 data
-  = "DATA " n:num { out.push(n) }
+  = "DATA " n:id { out.push(n) }
 
 mov
   = "MOV " a:id ", " b:id c:(", " i:id { return i })?

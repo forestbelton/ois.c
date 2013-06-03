@@ -65,11 +65,15 @@ prgm
   = (stmt '\n')+ { return build(); }
 
 stmt
-  = label { return [] }
+  = label
   / insn
+  / comment
 
 label
   = s:str ':' { add_label(s); }
+
+comment
+  = '#' [^\n]+
 
 insn
   = mov

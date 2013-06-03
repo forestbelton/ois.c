@@ -9,7 +9,7 @@
     bytes = bytes.map(function(b) {
       if(typeof b != 'string')
         return b;
- 
+
       if(b in dict)
         return dict[b];
  
@@ -47,6 +47,18 @@
     out = step(out, z, b);
     out = epi(out, c);
     
+    return out;
+  }
+
+  function gen_inc(a, c) {
+    var out = [];
+
+    out = out.concat([next + 5, a, next]);
+    next += 3;
+    out = out.concat([z, z, next + 1]);
+    out = out.push(255);
+    next += 4;
+
     return out;
   }
 
@@ -88,6 +100,10 @@ mov
 add
   = "ADD " a:id ", " b:id c:(", " i:id { return i })?
   { return gen_add(a, b, c) }
+
+add
+  = "INC " a:id
+  { return gen_inc(a); }
 
 jmp
   = "JMP " a:id { return gen_jmp(a) }

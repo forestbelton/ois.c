@@ -1,5 +1,6 @@
 {
   var z    = 255;
+  var out  = [];
   var next = 4;
   var dict = {};
 
@@ -24,30 +25,18 @@
     dict[name] = next;
   }
  
-  function step(out, a, b) {
-    var out = out.concat([a, b, next]);
-    
+  function step(a, b, c) {
+    if(typeof c == 'number')
+      next = c;
+
+    out   = out.concat([a, b, next]);
     next += 3;
-    return out;
-  }
-  
-  function epi(out, c) {
-    next = c === '' ? next : c;
-    return step(out, z, z);
-  }
-  
-  function gen_jmp(c) {
-    return [z, z, c];
   }
   
   function gen_add(a, b, c) {
-    var out = [];
-    
-    out = step(out, a, z);
-    out = step(out, z, b);
-    out = epi(out, c);
-    
-    return out;
+    step(a, z);
+    step(z, b);
+    step(z, z, c);
   }
 
   function gen_inc(a, c) {
@@ -63,14 +52,10 @@
   }
 
   function gen_mov(a, b, c) {
-    var out = [];
-    
-    out = step(out, b, b);
-    out = step(out, a, z);
-    out = step(out, z, b);
-    out = epi(out, c);
-    
-    return out;
+    step(b, b);
+    step(a, z);
+    step(z, b);
+    step(z, z, c);
   }
 }
 
@@ -91,7 +76,7 @@ insn
   / jmp
 
 data
-  = "DATA " n:num { return [n] }
+  = "DATA " n:num { out.push(n) }
 
 mov
   = "MOV " a:id ", " b:id c:(", " i:id { return i })?

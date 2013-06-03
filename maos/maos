@@ -3,10 +3,30 @@
 var fs     = require('fs'),
     parser = require('./parser');
 
-if(process.argv.length != 3) {
-  console.log('usage: maos [file]');
+if(process.argv.length < 3) {
+  console.log('usage: maos [--pretty] [file]');
   process.exit(1);
 }
 
-var code = fs.readFileSync(process.argv[2], { encoding: 'utf8' });
-console.log(parser.parse(code));
+var file   = process.argv[2];
+var pretty = false;
+
+if(file == '--pretty') {
+  pretty = true;
+  file = process.argv[3];
+}
+ 
+var code = fs.readFileSync(file, { encoding: 'utf8' });
+var out  = parser.parse(code);
+
+if(!pretty) {
+  var toHex = function(x) {
+    var s = x.toString(16);
+    return s.length == 1 ? '0' + s : s;
+  }
+
+  var buf = new Buffer(out.map(toHex).join(''), 'hex');
+  process.stdout.write(buf);
+}
+else
+  console.log(out);

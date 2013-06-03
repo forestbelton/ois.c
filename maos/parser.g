@@ -4,10 +4,8 @@
   var next = 4;
   var dict = {};
 
-  function build(stmts) {
-    var bytes = [].concat.apply([], stmts);
-
-    bytes = bytes.map(function(b) {
+  function build() {
+    out = out.map(function(b) {
       if(typeof b != 'string')
         return b;
 
@@ -18,7 +16,7 @@
       return 0;
     });
 
-    return bytes;
+    return out;
   }
 
   function add_label(name) {
@@ -64,7 +62,7 @@
 }
 
 prgm
-  = is:(i:stmt '\n' { return i })+ { return build(is); }
+  = (stmt '\n')+ { return build(); }
 
 stmt
   = label { return [] }

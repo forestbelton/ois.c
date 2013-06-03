@@ -39,6 +39,10 @@
     step(z, z, c);
   }
 
+  function gen_jmp(c) {
+    out = out.concat([z, z, c]);
+  }
+
   function gen_inc(a, c) {
     var out = [];
 

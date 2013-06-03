@@ -86,18 +86,18 @@ data
 
 mov
   = "MOV " a:id ", " b:id c:(", " i:id { return i })?
-  { return gen_mov(a, b, c) }
+  { gen_mov(a, b, c) }
 
 add
   = "ADD " a:id ", " b:id c:(", " i:id { return i })?
-  { return gen_add(a, b, c) }
+  { gen_add(a, b, c) }
 
 add
   = "INC " a:id
-  { return gen_inc(a); }
+  { gen_inc(a); }
 
 jmp
-  = "JMP " a:id { return gen_jmp(a) }
+  = "JMP " a:id { gen_jmp(a) }
 
 id
   = num

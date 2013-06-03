@@ -42,15 +42,10 @@
   }
 
   function gen_inc(a, c) {
-    var out = [];
-
     out = out.concat([next + 5, a, next]);
     next += 3;
-    out = out.concat([z, z, next + 1]);
-    out = out.push(255);
+    out = out.concat([z, z, next + 1, 255]);
     next += 4;
-
-    return out;
   }
 
   function gen_mov(a, b, c) {

@@ -24,10 +24,11 @@
   }
  
   function step(a, b, c) {
+    var p = next;
     if(typeof c == 'number')
-      next = c;
+      p = c;
 
-    out   = out.concat([a, b, next]);
+    out   = out.concat([a, b, p]);
     next += 3;
   }
   

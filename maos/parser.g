@@ -80,6 +80,7 @@ comment
 insn
   = mov
   / add
+  / inc
   / data
   / jmp
 
@@ -94,7 +95,7 @@ add
   = "ADD " a:id ", " b:id c:(", " i:id { return i })?
   { gen_add(a, b, c) }
 
-add
+inc
   = "INC " a:id c:(", " i:id { return i })?
   { gen_inc(a, c); }
 

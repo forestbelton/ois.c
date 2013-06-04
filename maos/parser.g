@@ -39,7 +39,8 @@
   }
 
   function gen_jmp(c) {
-    out = out.concat([z, z, c]);
+    out   = out.concat([z, z, c]);
+    next += 3;
   }
 
   function gen_inc(a, c) {

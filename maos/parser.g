@@ -20,7 +20,7 @@
   }
 
   function add_label(name) {
-    dict[name] = next;
+    dict[name] = next - 3;
   }
  
   function step(a, b, c) {

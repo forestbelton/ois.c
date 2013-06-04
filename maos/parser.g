@@ -44,9 +44,14 @@
   }
 
   function gen_inc(a, c) {
-    out = out.concat([next + 5, a, next]);
+    out = out.concat([next + 3, a, next]);
     next += 3;
-    out = out.concat([z, z, next + 1, 255]);
+
+    var p = next + 1;
+    if(typeof c == 'number')
+      p = c;
+
+    out  = out.concat([z, z, p, 255]);
     next += 4;
   }
 
@@ -90,8 +95,8 @@ add
   { gen_add(a, b, c) }
 
 add
-  = "INC " a:id
-  { gen_inc(a); }
+  = "INC " a:id c:(", " i:id { return i })?
+  { gen_inc(a, c); }
 
 jmp
   = "JMP " a:id { gen_jmp(a) }

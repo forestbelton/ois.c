@@ -43,7 +43,7 @@
     next += 3;
   }
 
-  function gen_inc(a, c) {
+  function decby(n, a, c) {
     out = out.concat([next + 3, a, next]);
     next += 3;
 
@@ -51,8 +51,16 @@
     if(typeof c == 'number')
       p = c;
 
-    out  = out.concat([z, z, p, 255]);
+    out  = out.concat([z, z, p, n]);
     next += 4;
+  }
+
+  function gen_inc(a, c) {
+    decby(255, a, c);
+  }
+
+  function gen_dec(a, c) {
+    decby(1, a, c);
   }
 
   function gen_mov(a, b, c) {
@@ -81,6 +89,7 @@ insn
   = mov
   / add
   / inc
+  / dec
   / data
   / jmp
 
@@ -98,6 +107,10 @@ add
 inc
   = "INC " a:id c:(", " i:id { return i })?
   { gen_inc(a, c); }
+
+dec
+  = "DEC " a:id c:(", " i:id { return i })?
+  { gen_dec(a, c); }
 
 jmp
   = "JMP " a:id { gen_jmp(a) }
